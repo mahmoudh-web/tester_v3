@@ -12,9 +12,11 @@ await connect(client)
 const testsCollection = db.collection("tests")
 
 let processing = false
+const helper = process.env.HELPER
+
 // create tests
 const testsCount = await testsCollection.countDocuments({})
-if (testsCount === 0) {
+if (testsCount === 0 && helper === "false") {
 	processing = true
 	await createTests()
 	processing = false
