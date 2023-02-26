@@ -26,7 +26,7 @@ if (testsCount === 0 && helper === "false") {
 const runTest = async () => {
 	const newTest = await testsCollection.findOne({
 		active: false,
-		interval: "1h",
+		// interval: "1h",
 	})
 	if (!newTest) return
 
