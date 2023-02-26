@@ -6,9 +6,12 @@ const createTests = async () => {
 
 	const instruments = []
 	const intervals = ["1m", "3m", "5m", "15m", "1h"]
-	const psar_increments = [0.02, 0.1, 0.15, 0.2]
-	const bollinger_periods = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-	const bollinger_deviations = [0.5, 1]
+	const psar_increments = [0.2]
+	const psar_maxs = [0.4]
+	const bollinger_periods = [2, 3]
+	const bollinger_deviations = [0.5]
+	const macd_longs = [8]
+	const macd_shorts = [2]
 
 	const tests = []
 
@@ -30,45 +33,47 @@ const createTests = async () => {
 	let counter = 1
 	instruments.forEach(instrument => {
 		intervals.forEach(interval => {
-			psar_increments.forEach(increment => {
-				for (let psar_max = 0.2; psar_max <= 0.6; psar_max += 0.1) {
-					for (let macd_long = 5; macd_long <= 15; macd_long++) {
-						for (
-							let macd_short = 2;
-							macd_short <= 8;
-							macd_short++
-						) {
-							if (
-								psar_max > increment &&
-								macd_short < macd_long * 0.6
-							) {
-								const test = {
-									symbol: instrument,
-									interval: interval,
-									active: false,
-									settings: {
-										psar: {
-											increment: increment,
-											max: psar_max,
-										},
-										macd: {
-											short: macd_short,
-											long: macd_long,
-											signal: 9,
-										},
-									},
-								}
-								tests.push(test)
-								console.log(
-									`created test #${counter.toLocaleString(
-										"en-GB"
-									)}`
+			psar_increments.forEach(psar_increment => {
+				psar_maxs.forEach(psar_max => {
+					macd_longs.forEach(macd_long => {
+						macd_shorts.forEach(macd_short => {
+							bollinger_periods.forEach(bollinger_period => {
+								bollinger_deviations.forEach(
+									bollinger_deviation => {
+										const test = {
+											symbol: instrument,
+											interval: interval,
+											active: false,
+											settings: {
+												psar: {
+													increment: psar_increment,
+													max: psar_max,
+												},
+												macd: {
+													short: macd_short,
+													long: macd_long,
+													signal: 9,
+												},
+												bollinger: {
+													period: bollinger_period,
+													deviation:
+														bollinger_deviation,
+												},
+											},
+										}
+										tests.push(test)
+										console.log(
+											`created test #${counter.toLocaleString(
+												"en-GB"
+											)}`
+										)
+										counter++
+									}
 								)
-								counter++
-							}
-						}
-					}
-				}
+							})
+						})
+					})
+				})
 			})
 		})
 	})
