@@ -24,13 +24,16 @@ if (testsCount === 0 && helper === "false") {
 
 // run tests
 const runTest = async () => {
+	processing = true
 	const newTest = await testsCollection.findOne({
 		active: false,
 		// interval: "1h",
 	})
-	if (!newTest) return
+	if (!newTest) {
+		processing = false
+		return
+	}
 
-	processing = true
 	await testsCollection.updateOne(
 		{ _id: newTest._id },
 		{ $set: { active: true } }
