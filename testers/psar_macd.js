@@ -29,12 +29,17 @@ const psar_macd = async test => {
 
 	const psar = indicators.psar(candles, test.settings.psar)
 	const macd = indicators.macd(candles, test.settings.macd)
+	const bollinger = indicators.bollinger(candles, test.settings.bollinger)
+
 	const candleData = addIndicatorData(
 		candles,
 		{ name: "psar", data: psar },
 		{ name: "macd_line", data: macd.macdLine },
 		{ name: "macd_signal", data: macd.macdSignal },
-		{ name: "macd_histogram", data: macd.histogram }
+		{ name: "macd_histogram", data: macd.histogram },
+		{ name: "bollinger_upper", data: bollinger.upper },
+		{ name: "bollinger_middle", data: bollinger.middle },
+		{ name: "bollinger_lower", data: bollinger.lower }
 	)
 
 	// run strategy
@@ -124,8 +129,19 @@ const psar_macd = async test => {
 }
 
 function buy(candle) {
-	const { psar, macd_line, macd_signal, macd_histogram, low } = candle
-	return macd_line < 0 && macd_signal < 0 && macd_histogram > 0 && psar < low
+	const {
+		psar,
+		macd_line,
+		macd_signal,
+		macd_histogram,
+		bollinger_middle,
+		bollinger_upper,
+		bollinger_lower,
+		low,
+		open,
+	} = candle
+	return open < bollinger_lower && psar < low
+	// return macd_line < 0 && macd_signal < 0 && macd_histogram > 0 && psar < low
 }
 
 function sell(candle) {

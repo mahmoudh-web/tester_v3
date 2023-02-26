@@ -36,4 +36,25 @@ const psar = (candles, settings) => {
 	return output
 }
 
-export { macd, psar }
+const bollinger = (candles, settings) => {
+	const { open, high, low, close, volume } = formatCandles(candles)
+
+	const upper = []
+	const lower = []
+	const middle = []
+
+	tulind.indicators.bbands.indicator(
+		[close],
+		[settings.period, settings.deviation],
+		(err, results) => {
+			if (err) console.log(err)
+			results[0].forEach(res => lower.push(res))
+			results[1].forEach(res => middle.push(res))
+			results[2].forEach(res => upper.push(res))
+		}
+	)
+
+	return { lower, middle, upper }
+}
+
+export { macd, psar, bollinger }
