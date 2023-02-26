@@ -51,7 +51,7 @@ const psar_macd = async test => {
 		if (token_balance > 0) {
 			// look for sell
 			if (sell(candle)) {
-				const amount = sellAmount(candle.close, token_balance)
+				const amount = sellAmount(candle.open, token_balance)
 				usdt_balance += amount
 				token_balance = 0
 				if (amount <= 10) losing++
@@ -66,7 +66,7 @@ const psar_macd = async test => {
 					timeISO: candle.startTimeISO,
 					direction: "sell",
 					amount,
-					price: candle.close,
+					price: candle.open,
 				})
 			}
 		} else {
