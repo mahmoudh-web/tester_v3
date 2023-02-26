@@ -38,6 +38,7 @@ const psar = (candles, settings) => {
 
 const bollinger = (candles, settings) => {
 	const { open, high, low, close, volume } = formatCandles(candles)
+	console.log(settings)
 
 	const upper = []
 	const lower = []

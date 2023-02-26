@@ -6,12 +6,12 @@ const createTests = async () => {
 
 	const instruments = []
 	const intervals = ["1m", "3m", "5m", "15m", "1h"]
-	const psar_increments = [0.2]
-	const psar_maxs = [0.4]
-	const bollinger_periods = [2, 3]
+	const psar_increments = [0.2, 0.3]
+	const psar_maxs = [0.4, 0.5]
+	const bollinger_periods = [2, 3, 5, 8]
 	const bollinger_deviations = [0.5]
-	const macd_longs = [8]
-	const macd_shorts = [2]
+	const macd_longs = [8, 12, 20]
+	const macd_shorts = [2, 5, 8]
 
 	const tests = []
 
@@ -40,34 +40,37 @@ const createTests = async () => {
 							bollinger_periods.forEach(bollinger_period => {
 								bollinger_deviations.forEach(
 									bollinger_deviation => {
-										const test = {
-											symbol: instrument,
-											interval: interval,
-											active: false,
-											settings: {
-												psar: {
-													increment: psar_increment,
-													max: psar_max,
+										if (macd_short < macd_long) {
+											const test = {
+												symbol: instrument,
+												interval: interval,
+												active: false,
+												settings: {
+													psar: {
+														increment:
+															psar_increment,
+														max: psar_max,
+													},
+													macd: {
+														short: macd_short,
+														long: macd_long,
+														signal: 9,
+													},
+													bollinger: {
+														period: bollinger_period,
+														deviation:
+															bollinger_deviation,
+													},
 												},
-												macd: {
-													short: macd_short,
-													long: macd_long,
-													signal: 9,
-												},
-												bollinger: {
-													period: bollinger_period,
-													deviation:
-														bollinger_deviation,
-												},
-											},
+											}
+											tests.push(test)
+											console.log(
+												`created test #${counter.toLocaleString(
+													"en-GB"
+												)}`
+											)
+											counter++
 										}
-										tests.push(test)
-										console.log(
-											`created test #${counter.toLocaleString(
-												"en-GB"
-											)}`
-										)
-										counter++
 									}
 								)
 							})

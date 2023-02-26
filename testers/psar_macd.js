@@ -80,7 +80,12 @@ const psar_macd = async test => {
 				usdt_balance -= 10
 				const amount = buyAmount(candle.open, 10)
 				token_balance += amount
-				console.log(`${candle.startTimeISO} - BUY USDT`)
+				console.log(
+					`${candle.startTimeISO} - BUY ${test.symbol.replace(
+						"USDT",
+						""
+					)}`
+				)
 				transactions.push({
 					testId: test._id,
 					symbol: test.symbol,
@@ -140,6 +145,7 @@ function buy(candle) {
 		low,
 		open,
 	} = candle
+	console.log(open, bollinger_lower)
 	return open < bollinger_lower && psar < low
 	// return macd_line < 0 && macd_signal < 0 && macd_histogram > 0 && psar < low
 }

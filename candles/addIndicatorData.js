@@ -38,11 +38,14 @@ const addIndicatorData = (candles, ...data) => {
 			macd_line: candle.macd_line,
 			macd_signal: candle.macd_signal,
 			macd_histogram: candle.macd_histogram,
+			bollinger_upper: candle.bollinger_upper,
+			bollinger_middle: candle.bollinger_middle,
+			bollinger_lower: candle.bollinger_lower,
 		}
 
 		cleanData.push(data)
 	})
-	return reverse(cleanData)
+	return reverse(candleData)
 }
 
 export { addIndicatorData }
