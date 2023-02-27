@@ -64,15 +64,15 @@ const psar_macd = async test => {
 				console.log(
 					`${candle.startTimeISO} - SELL USDT: ${usdt_balance}, ${test.symbol}: ${token_balance}`
 				)
-				transactions.push({
-					symbol: test.symbol,
-					interval: test.interval,
-					time: candle.startTime,
-					timeISO: candle.startTimeISO,
-					direction: "sell",
-					amount,
-					price: candle.open,
-				})
+				// transactions.push({
+				// 	symbol: test.symbol,
+				// 	interval: test.interval,
+				// 	time: candle.startTime,
+				// 	timeISO: candle.startTimeISO,
+				// 	direction: "sell",
+				// 	amount,
+				// 	price: candle.open,
+				// })
 			}
 		} else {
 			// look for buy
@@ -86,16 +86,16 @@ const psar_macd = async test => {
 						""
 					)}`
 				)
-				transactions.push({
-					testId: test._id,
-					symbol: test.symbol,
-					interval: test.interval,
-					time: candle.startTime,
-					timeISO: candle.startTimeISO,
-					direction: "buy",
-					amount,
-					price: candle.open,
-				})
+				// transactions.push({
+				// 	testId: test._id,
+				// 	symbol: test.symbol,
+				// 	interval: test.interval,
+				// 	time: candle.startTime,
+				// 	timeISO: candle.startTimeISO,
+				// 	direction: "buy",
+				// 	amount,
+				// 	price: candle.open,
+				// })
 			}
 		}
 	})
@@ -130,7 +130,7 @@ const psar_macd = async test => {
 	}
 
 	await storeResults(results)
-	await storeTransactions(transactions)
+	// await storeTransactions(transactions)
 }
 
 function buy(candle) {
