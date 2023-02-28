@@ -114,7 +114,7 @@ const psar_macd = async test => {
 	// 		100
 	// 	).toFixed(2)}`
 	// )
-	console.log(`Profit: ${usdt_balance - 100}`)
+	console.log(`${test.symbol} Profit: ${usdt_balance - 100}`)
 
 	const results = {
 		testId: test._id,
@@ -127,6 +127,7 @@ const psar_macd = async test => {
 		win_rate: Number(((winning / total) * 100).toFixed(2)),
 		lose_rate: Number(((losing / total) * 100).toFixed(2)),
 		profit: usdt_balance - 100,
+		settings: test.settings,
 	}
 
 	await storeResults(results)

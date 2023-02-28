@@ -5,11 +5,11 @@ const createTests = async () => {
 	const { db } = database()
 
 	const instruments = []
-	const intervals = ["1m", "3m", "5m", "15m", "1h"]
+	const intervals = ["1m", "3m", "5m"]
 	const psar_increments = [0.2, 0.3]
 	const psar_maxs = [0.4, 0.5]
 	const bollinger_periods = [2, 3, 5, 8]
-	const bollinger_deviations = [0.5]
+	const bollinger_deviations = [0.5, 1]
 	const macd_longs = [8, 12, 20]
 	const macd_shorts = [2, 5, 8]
 
