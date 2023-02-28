@@ -106,7 +106,7 @@ const psar_macd = async test => {
 	// 		""
 	// 	)}: ${token_balance}`
 	// )
-	// const total = winning + losing
+	const total = winning + losing
 	// console.log(`Winning Trades: ${winning}, Losing Trades: ${losing}`)
 	// console.log(
 	// 	`Win Rate: ${((winning / total) * 100).toFixed(2)}, Lose Rate: ${(
