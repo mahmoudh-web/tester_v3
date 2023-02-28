@@ -7,7 +7,7 @@ import { storeResults, storeTransactions } from "../db/results.js"
 const { db } = database()
 
 const psar_macd = async test => {
-	console.log(test)
+	// console.log(test)
 
 	// get candles
 	const candles = []
@@ -23,7 +23,7 @@ const psar_macd = async test => {
 		.sort({ startTTime: 1 })
 		.forEach(candle => candles.push(candle))
 
-	console.log(candles.length)
+	// console.log(candles.length)
 
 	// apply indicators
 
@@ -61,9 +61,9 @@ const psar_macd = async test => {
 				token_balance = 0
 				if (amount <= 10) losing++
 				else if (amount > 10) winning++
-				console.log(
-					`${candle.startTimeISO} - SELL USDT: ${usdt_balance}, ${test.symbol}: ${token_balance}`
-				)
+				// console.log(
+				// 	`${candle.startTimeISO} - SELL USDT: ${usdt_balance}, ${test.symbol}: ${token_balance}`
+				// )
 				// transactions.push({
 				// 	symbol: test.symbol,
 				// 	interval: test.interval,
@@ -80,12 +80,12 @@ const psar_macd = async test => {
 				usdt_balance -= 10
 				const amount = buyAmount(candle.open, 10)
 				token_balance += amount
-				console.log(
-					`${candle.startTimeISO} - BUY ${test.symbol.replace(
-						"USDT",
-						""
-					)}`
-				)
+				// console.log(
+				// 	`${candle.startTimeISO} - BUY ${test.symbol.replace(
+				// 		"USDT",
+				// 		""
+				// 	)}`
+				// )
 				// transactions.push({
 				// 	testId: test._id,
 				// 	symbol: test.symbol,
@@ -100,20 +100,20 @@ const psar_macd = async test => {
 		}
 	})
 
-	console.log(
-		`Final USDT: ${usdt_balance}, ${test.symbol.replace(
-			"USDT",
-			""
-		)}: ${token_balance}`
-	)
-	const total = winning + losing
-	console.log(`Winning Trades: ${winning}, Losing Trades: ${losing}`)
-	console.log(
-		`Win Rate: ${((winning / total) * 100).toFixed(2)}, Lose Rate: ${(
-			(losing / total) *
-			100
-		).toFixed(2)}`
-	)
+	// console.log(
+	// 	`Final USDT: ${usdt_balance}, ${test.symbol.replace(
+	// 		"USDT",
+	// 		""
+	// 	)}: ${token_balance}`
+	// )
+	// const total = winning + losing
+	// console.log(`Winning Trades: ${winning}, Losing Trades: ${losing}`)
+	// console.log(
+	// 	`Win Rate: ${((winning / total) * 100).toFixed(2)}, Lose Rate: ${(
+	// 		(losing / total) *
+	// 		100
+	// 	).toFixed(2)}`
+	// )
 	console.log(`Profit: ${usdt_balance - 100}`)
 
 	const results = {
@@ -145,7 +145,7 @@ function buy(candle) {
 		low,
 		open,
 	} = candle
-	console.log(open, bollinger_lower)
+	// console.log(open, bollinger_lower)
 	return open < bollinger_lower && psar < low
 	// return macd_line < 0 && macd_signal < 0 && macd_histogram > 0 && psar < low
 }
